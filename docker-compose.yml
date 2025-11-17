@@ -1,0 +1,48 @@
+version: '3.8'
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  tailscale_state:
+
+services:
+  # Этот контейнер подключает весь стек к сети Tailscale
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: monitoring-tailscale
+    hostname: monitoring-stack # MagicDNS имя этого стека
+    environment:
+      # Переменная TS_AUTHKEY должна быть определена в .env файле
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_EXTRA_ARGS=--hostname=monitoring-stack
+    volumes:
+      - tailscale_state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    # Этот сервис подключается к сети через контейнер 'tailscale'
+    network_mode: "service:tailscale"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    depends_on:
+      - tailscale
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    # Этот сервис также подключается к сети через контейнер 'tailscale'
+    network_mode: "service:tailscale"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - tailscale
+    restart: unless-stopped

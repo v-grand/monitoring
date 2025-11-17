@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      # Prometheus собирает метрики с самого себя через loopback-интерфейс
+      # внутри своего сетевого пространства (которое общее с tailscale).
+      - targets: ['localhost:9090']
+
+  - job_name: 'nginx-gateway'
+    static_configs:
+      # Собираем метрики с nginx-exporter, который запущен на хосте шлюза.
+      # !!! ВАЖНО: Замените 'your-nginx-gateway-host' на реальное MagicDNS имя
+      # или IP-адрес вашего хоста в сети Tailscale.
+      - targets: ['your-nginx-gateway-host:9113']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      # Собираем системные метрики с хоста, на котором работает шлюз.
+      # !!! ВАЖНО: Замените 'your-nginx-gateway-host' на реальное MagicDNS имя
+      # или IP-адрес вашего хоста в сети Tailscale.
+      - targets: ['your-nginx-gateway-host:9100']
