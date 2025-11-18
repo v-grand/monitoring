@@ -55,7 +55,9 @@ services:
     # Loki также может использовать tailscale для доступа к сети
     network_mode: "service:tailscale"
     volumes:
-      - ./loki-local-config.yaml:/etc/loki/local-config.yaml
+      - ./loki-local-config.yaml:/etc/loki/local-config.yaml:ro
+      - ./loki:/loki
+      - ./loki/rules:/etc/loki/rules
     command: -config.file=/etc/loki/local-config.yaml
     depends_on:
       - tailscale
