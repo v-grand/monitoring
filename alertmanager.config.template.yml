@@ -60,9 +60,5 @@ receivers:
         headers:
           Subject: 'Alert: {{ .GroupLabels.alertname }}'
 
-# Группировка уведомлений
-grouping:
-  group_by: ['alertname', 'instance', 'severity']
-  group_wait: 10s
-  group_interval: 10s
-  repeat_interval: 12h
+# Note: grouping settings are configured under `route` (group_by/group_wait/group_interval/repeat_interval)
+# Do not use a top-level `grouping` key in Alertmanager config (unsupported).
