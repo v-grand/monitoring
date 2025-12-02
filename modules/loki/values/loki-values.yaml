@@ -1,0 +1,31 @@
+# loki-values.yaml for Loki Helm chart
+
+# Example: Persistence configuration
+# persistence:
+#   enabled: true
+#   size: 100Gi
+#   storageClassName: "standard"
+
+# Example: Resource limits
+# resources:
+#   requests:
+#     cpu: 500m
+#     memory: 1Gi
+#   limits:
+#     cpu: 1000m
+#     memory: 2Gi
+
+# Example: Storage configuration (e.g., S3, GCS)
+# config:
+#   chunk_store_config:
+#     max_look_back_period: 30d
+#   table_manager:
+#     retention_deletes_enabled: true
+#     retention_period: 30d
+#   compactor:
+#     compaction_interval: 10m
+#   storage_config:
+#     aws:
+#       s3: s3://your-loki-bucket/
+#     gcs:
+#       bucket_name: your-loki-bucket

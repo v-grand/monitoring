@@ -1,22 +1,20 @@
-# Environment files with secrets
+# Terraform
+.terraform/
+*.tfplan
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Local .env file
 .env
-.env.local
-.secrets.env
 
-# IDE
-.vscode/
+# IDE-specific files
 .idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Docker volumes (optional - remove if you want to persist)
-# prometheus_data/
-# grafana_data/
+.vscode/
 
 # Logs
 *.log
+
+# OS generated files
+.DS_Store
+Thumbs.db

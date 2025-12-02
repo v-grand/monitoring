@@ -1,0 +1,40 @@
+# prometheus-values.yaml for Prometheus Helm chart
+
+server:
+  remoteWrite:
+    - url: ${remote_write_url}
+      # Add other remote write configurations as needed
+
+  # Example: Persistence configuration
+  # persistentVolume:
+  #   enabled: true
+  #   size: 50Gi
+  #   storageClass: "standard"
+
+  # Example: Resource limits
+  # resources:
+  #   requests:
+  #     cpu: 500m
+  #     memory: 1Gi
+  #   limits:
+  #     cpu: 1000m
+  #     memory: 2Gi
+
+  # Example: Scrape configurations (can be managed via ConfigMap or other means)
+  # extraScrapeConfigs: |
+  #   - job_name: 'kubernetes-nodes'
+  #     kubernetes_sd_configs:
+  #       - role: node
+  #     relabel_configs:
+  #       - action: labelmap
+  #         regex: __meta_kubernetes_node_label_(.+)
+  #       - target_label: __address__
+  #         replacement: kubernetes.default.svc:443
+  #       - source_labels: [__meta_kubernetes_node_name]
+  #         regex: (.+)
+  #         target_label: __metrics_path__
+  #         replacement: /api/v1/nodes/${1}/proxy/metrics
+  #     scheme: https
+  #     tls_config:
+  #       insecure_skip_verify: true
+  #     bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token

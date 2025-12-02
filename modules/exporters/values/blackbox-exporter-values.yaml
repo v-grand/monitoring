@@ -1,0 +1,36 @@
+# blackbox-exporter-values.yaml for Prometheus Blackbox Exporter Helm chart
+
+# Example: Persistence configuration (not typically needed for blackbox exporter)
+# persistence:
+#   enabled: false
+
+# Example: Resource limits
+# resources:
+#   requests:
+#     cpu: 100m
+#     memory: 128Mi
+#   limits:
+#     cpu: 200m
+#     memory: 256Mi
+
+# Example: Modules configuration
+# modules:
+#   http_2xx:
+#     prober: http
+#     timeout: 5s
+#     http:
+#       valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+#       valid_status_codes: []
+#       method: GET
+#   tcp_connect:
+#     prober: tcp
+#     timeout: 5s
+
+# Example: Targets to probe (can also be passed dynamically)
+# targets:
+#   - name: "example-website"
+#     url: "https://example.com"
+#     module: http_2xx
+#   - name: "google-dns"
+#     url: "8.8.8.8:53"
+#     module: tcp_connect

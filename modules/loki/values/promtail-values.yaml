@@ -1,0 +1,24 @@
+# promtail-values.yaml for Promtail Helm chart
+
+config:
+  clients:
+    - url: ${loki_url}
+
+# Example: Resource limits
+# resources:
+#   requests:
+#     cpu: 100m
+#     memory: 128Mi
+#   limits:
+#     cpu: 200m
+#     memory: 256Mi
+
+# Example: Extra scrape configurations
+# extraScrapeConfigs:
+#   - job_name: system-logs
+#     static_configs:
+#       - targets:
+#           - localhost
+#         labels:
+#           job: varlogs
+#           __path__: /var/log/*log

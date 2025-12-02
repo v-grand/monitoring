@@ -1,0 +1,32 @@
+# grafana-values.yaml for Grafana Helm chart
+
+admin:
+  user: ${admin_user}
+  password: ${admin_password}
+
+# Example: Persistence configuration
+# persistence:
+#   enabled: true
+#   size: 10Gi
+#   storageClassName: "standard"
+
+# Example: Resource limits
+# resources:
+#   requests:
+#     cpu: 200m
+#     memory: 256Mi
+#   limits:
+#     cpu: 500m
+#     memory: 512Mi
+
+# Example: OAuth configuration (uncomment and configure as needed)
+# grafana.ini:
+#   server:
+#     root_url: http://grafana.example.com
+#   auth.github:
+#     enabled: true
+#     allow_sign_up: true
+#     client_id: YOUR_GITHUB_CLIENT_ID
+#     client_secret: YOUR_GITHUB_CLIENT_SECRET
+#     scopes: allow_user_emails,read:org
+#     allowed_organizations: your_org_name
